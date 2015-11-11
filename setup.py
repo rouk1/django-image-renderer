@@ -1,37 +1,55 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-import os
-from setuptools import setup
+# -*- coding: utf-8 -*-
 
+from setuptools import setup
+import re
+import os
+import sys
+
+
+name = 'django-image-renderer'
+package = 'renderer'
+description = 'render image in various sizes'
+url = 'https://github.com/rouk1/django-image-renderer'
+author = 'rouk1'
+author_email = 'matthieu.jouis@gmail.com'
+license = 'WTFPL'
+install_requires = ['Pillow', 'django-picklefield']
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
     README = readme.read()
 
-# allow setup.py to be run from any path
-os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+
+def get_version(package):
+    """
+    Return package version as listed in `__version__` in `init.py`.
+    """
+    init_py = open(os.path.join(package, '__init__.py')).read()
+    return re.search(
+        "^__version__ = ['\"]([^'\"]+)['\"]",
+        init_py,
+        re.MULTILINE
+    ).group(1)
+
+
+if sys.argv[-1] == 'publish':
+    os.system("python setup.py sdist upload")
+    args = {'version': get_version(package)}
+    print "You probably want to also tag the version now:"
+    print "  git tag -a %(version)s -m 'version %(version)s'" % args
+    print "  git push --tags"
+    sys.exit()
+
 
 setup(
-    name='django-image-renderer',
-    version='0.1',
-    packages=['renderer'],
-    include_package_data=True,
-    license='WTFPL',
-    description='A simple Django app to conduct Web-based polls.',
+    name=name,
+    version=get_version(package),
+    url=url,
+    license=license,
+    description=description,
     long_description=README,
-    url='https://github.com/rouk1/django-image-renderer',
-    author='Matthieu Jouis',
-    author_email='matthieu.jouis@gmail.com',
-    classifiers=[
-        'Environment :: Web Environment',
-        'Framework :: Django',
-        'Intended Audience :: Developers',
-        'License :: WTFPL',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Internet :: WWW/HTTP',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-    ],
-    install_requires=[
-        'Pillow',
-    ],
+    author=author,
+    author_email=author_email,
+    packages=[package],
+    include_package_data=True,
+    install_requires=install_requires
 )

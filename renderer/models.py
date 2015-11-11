@@ -42,16 +42,6 @@ class MasterImage(models.Model):
         '''return master image url'''
         return self.master.url
 
-    def admin_thumbnail(self):
-        '''admin image tag for easy browse'''
-        t = (self.get_rendition_url(100), self.alternate_text)
-        return '<img src="%s" alt="%s"/>' % t
-    admin_thumbnail.allow_tags = True
-
-    def get_renditions_count(self):
-        '''admin number of renditions'''
-        return '%d rendition(s)' % len(self.renditions)
-
     def get_rendition_size(self, width=0, height=0):
         '''returns real rendition URL'''
         if width == 0 and height == 0:
