@@ -1,6 +1,6 @@
 # Django image renderer
 
-[![build-status-image]][travis]
+[![Build Status](https://travis-ci.org/rouk1/django-image-renderer.svg?branch=master)](https://travis-ci.org/rouk1/django-image-renderer)
 
 Django image renderer is Django app that will help you render images in many sizes (renditions).
 
