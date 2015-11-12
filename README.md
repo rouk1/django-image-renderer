@@ -15,7 +15,7 @@ Django image renderer is Django app that will help you render images in many siz
 - rendition cached on disk
 - resize keeping orignal aspect ratio
 - crop if needed
-- simple MasterImage widget for admin site
+- simple widget for admin site
 
 ## Quick start
 
@@ -83,6 +83,28 @@ This will render as:
 
 ```HTML
 <img src="/media/img/0fb34de8-9d83-456a-828b-72ab21f8ebab_42x42.png" width="42" height="42" alt="">
+```
+
+When using _MasterImage_ in your model you may need a widget who provides a preview for you image.
+For convenience a mixin is provided.
+
+_models.py_
+```python
+from django.db import models
+
+class DemoModel(models.Model):
+    master = models.ForeignKey('renderer.MasterImage')
+```
+
+_admin.py_
+```python
+from demo.models import DemoModel
+from django.contrib import admin
+from renderer.widgets import MasterImageAdminMixin
+
+@admin.register(DemoModel)
+class DemoModelAdmin(MasterImageAdminMixin, admin.ModelAdmin):
+    fields = ('master', )
 ```
 
 ## Sample project
