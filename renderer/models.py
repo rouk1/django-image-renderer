@@ -114,7 +114,7 @@ class MasterImage(models.Model):
 
         if(target_w != self.master_width or target_h != self.master_height):
             r = target_w / target_h
-            R = self.master_width / self.master_height
+            R = float(self.master_width) / self.master_height
             if r != R:
                 if r > R:
                     crop_w = self.master_width
