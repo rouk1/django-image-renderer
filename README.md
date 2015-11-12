@@ -1,6 +1,7 @@
 # Django image renderer
 
 [![Build Status](https://travis-ci.org/rouk1/django-image-renderer.svg?branch=master)](https://travis-ci.org/rouk1/django-image-renderer)
+[![codecov.io](https://codecov.io/github/rouk1/django-image-renderer/coverage.svg?branch=master)](https://codecov.io/github/rouk1/django-image-renderer?branch=master)
 
 Django image renderer is Django app that will help you render images in many sizes (renditions).
 
