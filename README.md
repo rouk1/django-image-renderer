@@ -1,6 +1,10 @@
 # Django image renderer
 
+[![build-status-image]][travis]
+
 Django image renderer is Django app that will help you render images in many sizes (renditions).
+
+---
 
 ## Features
 
