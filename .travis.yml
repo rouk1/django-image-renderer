@@ -11,8 +11,7 @@ install:
   - pip install -q -r requirements.txt
 
 script:
-  - coverage run sample/manage.py test renderer
-  - coverage run sample/manage.py test demo
+  - coverage run sample/manage.py test demo renderer
 
 after_success:
   - codecov
