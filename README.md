@@ -13,11 +13,12 @@ Django image renderer is Django app that will help you render images in many siz
 - uses Django's _default_storage_ to let you play with whatever storage backend you'll need
 - uploaded image files named using uuid
 - rendition cached on disk
-
+- resize keeping orignal aspect ratio
+- crop if needed
 
 ## Quick start
 
-1. Add "renderer" to your INSTALLED_APPS setting like this::
+Add "renderer" to your INSTALLED_APPS setting like this:
 
 ```python
 INSTALLED_APPS = (
@@ -26,18 +27,46 @@ INSTALLED_APPS = (
 )
 ```
 
-2. Include the polls URLconf in your project urls.py like this::
+Include the renderer URLconf in your project urls.py like this:
 
 ```python
 url(r'^renderer/', include('renderer.urls')),
 ```
 
-3. Run `python manage.py migrate` to create the renderer models.
+Run `python manage.py migrate` to create the renderer models.
 
-4. Start the development server and visit http://127.0.0.1:8000/admin/
-   to create a MasterImage (you'll need the Admin app enabled).
+Start the development server and visit http://127.0.0.1:8000/admin/
+to create a MasterImage (you'll need the Admin app enabled).
 
+## Usage
+
+With a _MasterImage_ you can ask for renditions.
+
+```python
+m = MasterImage.objects.first()
+
+# get the master file's URL
+m.get_master_url()
+# or
+m.get_rendition_url(0, 0)
+
+# if you want to get another rendition that keeps master's aspect ratio 
+url = m.get_rendition_url(200, 0) # cache and return URL of a renditions that as 200 pixels width and height computed according to master's aspect ratio
+url = m.get_rendition_url(0, 50) # cache and return URL of a renditions that as 50 pixels height and width computed according to master's aspect ratio
+```
+
+If you ask for a size that do not fit master's aspect ration you'll receive a center cropped image.
 
 ## Sample project
 
-TODO
+A sample project is available in the [sample](https://github.com/rouk1/django-image-renderer/tree/master/sample) folder.
+Test it as an usual django project:
+
+```sh
+virtualenv --no-site-packages venv
+source venv/bin/activate
+pip install -r requirements.txt
+python sample/manage.py migrate
+python sample/manage.py createsuperuser
+python sample/manage.py runserver
+```
