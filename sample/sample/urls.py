@@ -6,7 +6,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('demo.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^renderer/', include('renderer.urls')),
+    url(r'^renderer/', include('renderer.urls', namespace='renderer')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Image Renderer Sample'

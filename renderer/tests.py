@@ -65,3 +65,28 @@ class RendererTest(TestCase):
         self.assertEqual(r.status_code, 200, (
             'cant access change page'
         ))
+
+    def test_views(self):
+        master_image = self.create_image()
+
+        c = Client()
+
+        r = c.get(reverse('renderer:get_rendition_url', args=(master_image.pk, 0, 0)))
+        self.assertEqual(r.status_code, 200, (
+            'cant get_rendition_url for rendition 0x0'
+        ))
+
+        r = c.get(reverse('renderer:get_rendition_url', args=(master_image.pk, 0, 10)))
+        self.assertEqual(r.status_code, 200, (
+            'cant get_rendition_url for rendition 0x10'
+        ))
+
+        r = c.get(reverse('renderer:get_rendition_url', args=(master_image.pk, 10, 10)))
+        self.assertEqual(r.status_code, 200, (
+            'cant get_rendition_url for rendition 10x10'
+        ))
+
+        r = c.get(reverse('renderer:get_master_url', args=(master_image.pk,)))
+        self.assertEqual(r.status_code, 200, (
+            'cant get_master_url'
+        ))
