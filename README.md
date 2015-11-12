@@ -62,6 +62,29 @@ url = m.get_rendition_url(0, 50)
 
 If you ask for a size that do not fit master's aspect ration you'll receive a center cropped image.
 
+You can also ask for a rendition in templates. 
+
+```python
+de index(request):
+    m = MasterImage.objects.first()
+    return render(request, 'demo/index.html', {
+        'master': m,
+    })
+```
+
+```HTML+Django
+{% load renderer_extra %}
+...
+{% rendition master 42 42 %}
+...
+```
+
+This will render as:
+
+```HTML
+<img src="/media/img/0fb34de8-9d83-456a-828b-72ab21f8ebab_42x42.png" width="42" height="42" alt="">
+```
+
 ## Sample project
 
 A sample project is available in the [sample](https://github.com/rouk1/django-image-renderer/tree/master/sample) folder.
