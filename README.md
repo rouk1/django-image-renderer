@@ -65,7 +65,7 @@ If you ask for a size that do not fit master's aspect ration you'll receive a ce
 You can also ask for a rendition in templates. 
 
 ```python
-de index(request):
+def index(request):
     m = MasterImage.objects.first()
     return render(request, 'demo/index.html', {
         'master': m,
