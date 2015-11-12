@@ -109,7 +109,7 @@ class MasterImage(models.Model):
 
         rendition_key = '%dx%d' % (target_w, target_h)
 
-        if hasattr(self.renditions, rendition_key):
+        if rendition_key in self.renditions:
             return self.renditions[rendition_key]
 
         if(target_w != self.master_width or target_h != self.master_height):

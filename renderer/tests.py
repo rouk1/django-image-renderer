@@ -113,12 +113,16 @@ class RendererTest(TestCase):
         master_image.master.open()
 
         master_image.get_rendition_url(40, 40)
-        # call it a second time to hit cache
-        master_image.get_rendition_url(40, 40)
+        # try to make this rendition again
+        master_image.make_rendition(40, 40)
 
         # change master
         master_image.master = ContentFile(make_image().read(), 'toto.png')
         master_image.save()
         self.assertEqual(0, len(master_image.renditions))
+
+        # change master with no alt name
+        master_image.alternate_text = ''
+        master_image.__unicode__()
 
         master_image.delete()
