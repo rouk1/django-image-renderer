@@ -56,6 +56,7 @@ class RendererTest(TestCase):
 
     def test_admin_pages(self):
         username, password = create_superuser()
+        master_image = create_image()
 
         c = Client()
         c.login(username=username, password=password)
@@ -70,7 +71,6 @@ class RendererTest(TestCase):
             'cant access add page'
         ))
 
-        master_image = create_image()
         r = c.get(reverse('admin:renderer_masterimage_change', args=(master_image.pk,)))
         self.assertEqual(r.status_code, 200, (
             'cant access change page'

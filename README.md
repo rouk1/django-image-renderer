@@ -36,7 +36,7 @@ url(r'^renderer/', include('renderer.urls', namespace='renderer'))),
 
 Run `python manage.py migrate` to create the renderer models.
 
-Start the development server and visit http://127.0.0.1:8000/admin/
+Start the development server and visit http://localhost:8000/admin/
 to create a MasterImage (you'll need the Admin app enabled).
 
 ## Usage
