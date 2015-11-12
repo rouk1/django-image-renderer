@@ -18,11 +18,16 @@ def create_superuser():
     return username, password
 
 
-def create_image():
+def make_image():
     image_file = StringIO()
     image = Image.new('RGBA', size=(50, 50), color=(256, 0, 0))
     image.save(image_file, 'png')
     image_file.seek(0)
+    return image_file
+
+
+def create_image():
+    image_file = make_image()
     master_image = MasterImage(
         master=ContentFile(image_file.read(), 'test-image.png'),
         alternate_text='test'
@@ -38,6 +43,7 @@ class RendererTest(TestCase):
         self.assertTrue(MasterImage.objects.all() > 0)
         self.assertTrue(len(master_image.get_master_url()) > 0)
         self.assertTrue('test' not in master_image.get_master_filename())
+        master_image.delete()
 
     def test_rendition(self):
         master_image = create_image()
@@ -45,6 +51,8 @@ class RendererTest(TestCase):
         # why should I do that ?
         master_image.master.open()
         master_image.get_rendition_url(40, 40)
+        self.assertEqual(1, len(master_image.renditions))
+        master_image.delete()
 
     def test_admin_pages(self):
         username, password = create_superuser()
@@ -67,6 +75,7 @@ class RendererTest(TestCase):
         self.assertEqual(r.status_code, 200, (
             'cant access change page'
         ))
+        master_image.delete()
 
     def test_views(self):
         master_image = create_image()
@@ -92,3 +101,24 @@ class RendererTest(TestCase):
         self.assertEqual(r.status_code, 200, (
             'cant get_master_url'
         ))
+
+        master_image.delete()
+
+    def test_model_methods(self):
+        master_image = create_image()
+        master_image.__unicode__()
+
+        # FIXME force reopen the file
+        # why should I do that ?
+        master_image.master.open()
+
+        master_image.get_rendition_url(40, 40)
+        # call it a second time to hit cache
+        master_image.get_rendition_url(40, 40)
+
+        # change master
+        master_image.master = ContentFile(make_image().read(), 'toto.png')
+        master_image.save()
+        self.assertEqual(0, len(master_image.renditions))
+
+        master_image.delete()

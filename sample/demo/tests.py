@@ -15,6 +15,7 @@ def create_demo_model():
 class WidgetTest(TestCase):
     def test_admin_widget(self):
         username, password = create_superuser()
+        dm = create_demo_model()
 
         c = Client()
         c.login(username=username, password=password)
@@ -29,14 +30,13 @@ class WidgetTest(TestCase):
             'cant access add page'
         ))
 
-        dm = create_demo_model()
         r = c.get(reverse('admin:demo_demomodel_change', args=(dm.pk,)))
         self.assertEqual(r.status_code, 200, (
             'cant access change page'
         ))
 
     def test_demo_view(self):
-        dm = create_demo_model()
+        create_demo_model()
 
         c = Client()
         r = c.get(reverse('demo:index'))
