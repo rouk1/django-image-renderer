@@ -43,7 +43,7 @@ class MasterImageWidget(ForeignKeyRawIdWidget):
             attrs = {}
 
         attrs['class'] = 'vForeignKeyRawIdAdminField vForeignMasterImageWidget'
-        url = reverse('get_rendition_url', args=[1, 1, 1])
+        url = reverse('renderer:get_rendition_url', args=[1, 1, 1])
         attrs['data-get-rendition-url'] = url.replace('1/1/1/', '')
 
         if value:

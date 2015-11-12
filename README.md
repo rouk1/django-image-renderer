@@ -15,6 +15,7 @@ Django image renderer is Django app that will help you render images in many siz
 - rendition cached on disk
 - resize keeping orignal aspect ratio
 - crop if needed
+- simple MasterImage widget for admin site
 
 ## Quick start
 
@@ -30,7 +31,7 @@ INSTALLED_APPS = (
 Include the renderer URLconf in your project urls.py like this:
 
 ```python
-url(r'^renderer/', include('renderer.urls')),
+url(r'^renderer/', include('renderer.urls', namespace='renderer'))),
 ```
 
 Run `python manage.py migrate` to create the renderer models.
@@ -50,9 +51,13 @@ m.get_master_url()
 # or
 m.get_rendition_url(0, 0)
 
-# if you want to get another rendition that keeps master's aspect ratio 
-url = m.get_rendition_url(200, 0) # cache and return URL of a renditions that as 200 pixels width and height computed according to master's aspect ratio
-url = m.get_rendition_url(0, 50) # cache and return URL of a renditions that as 50 pixels height and width computed according to master's aspect ratio
+# cache and return URL of a renditions that as 200 pixels width 
+# and height computed according to master's aspect ratio
+url = m.get_rendition_url(200, 0)
+
+# cache and return URL of a renditions that as 50 pixels height 
+# and width computed according to master's aspect ratio
+url = m.get_rendition_url(0, 50) 
 ```
 
 If you ask for a size that do not fit master's aspect ration you'll receive a center cropped image.
