@@ -39,8 +39,7 @@ class MasterImageWidget(ForeignKeyRawIdWidget):
         }
 
     def render(self, name, value, attrs=None):
-        if attrs is None:
-            attrs = {}
+        attrs = attrs or {}
 
         attrs['class'] = 'vForeignKeyRawIdAdminField vForeignMasterImageWidget'
         url = reverse('renderer:get_rendition_url', args=[1, 1, 1])
