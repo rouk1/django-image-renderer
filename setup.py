@@ -21,11 +21,11 @@ install_requires = [
 
 try:
     from pypandoc import convert
-    read_md = lambda f: convert(f, 'rst')
+    README = convert('README.md', 'rst')
 except ImportError:
-    read_md = lambda f: open(f, 'r').read()
+    README = ''
 
-README = read_md('README.md')
+print(README)
 
 
 def get_version(package):
