@@ -1,7 +1,8 @@
 # Django image renderer
 
 [![Build Status](https://travis-ci.org/rouk1/django-image-renderer.svg?branch=master)](https://travis-ci.org/rouk1/django-image-renderer)
-[![codecov.io](https://codecov.io/github/rouk1/django-image-renderer/coverage.svg?branch=master)](https://codecov.io/github/rouk1/django-image-renderer?branch=master)
+[![Coverage](https://codecov.io/github/rouk1/django-image-renderer/coverage.svg?branch=master)](https://codecov.io/github/rouk1/django-image-renderer?branch=master)
+[![PyPI Version](https://img.shields.io/pypi/v/django-image-renderer.svg?style=flat-square)](https://pypi.python.org/pypi/django-image-renderer)
 
 Django image renderer is Django app that will help you render images in many sizes (renditions).
 
@@ -46,10 +47,13 @@ to create a MasterImage (you'll need the Admin app enabled).
 
 ## Installation
 
-TODO
+```sh
+pip install django-image-renderer
+```
 
 ## Usage
 
+There is only one model in the app: _MasterImage_.
 With a _MasterImage_ you can ask for renditions.
 
 ```python
@@ -82,7 +86,7 @@ def index(request):
 ```
 
 ```HTML+Django
-{% load renderer_extra %}
+{% load renderer %}
 ...
 {% rendition master 42 42 %}
 ...

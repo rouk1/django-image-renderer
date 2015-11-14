@@ -5,6 +5,7 @@ from setuptools import setup
 import re
 import os
 import sys
+import shutil
 
 
 name = 'django-image-renderer'
@@ -18,14 +19,7 @@ install_requires = [
     'Pillow>=3.0.0',
     'django-picklefield>=0.3.2'
 ]
-
-try:
-    from pypandoc import convert
-    README = convert('README.md', 'rst')
-except ImportError:
-    README = ''
-
-print(README)
+README = ''
 
 
 def get_version(package):
@@ -41,11 +35,27 @@ def get_version(package):
 
 
 if sys.argv[-1] == 'publish':
-    os.system("python setup.py sdist upload")
-    args = {'version': get_version(package)}
-    print "You probably want to also tag the version now:"
-    print "  git tag -a %(version)s -m 'version %(version)s'" % args
-    print "  git push --tags"
+    try:
+        from pypandoc import convert
+        README = convert('README.md', 'rst')
+    except ImportError:
+        print("pypandoc not installed.\nUse `pip install pypandoc`.\nExiting.")
+        sys.exit()
+    if os.system("pip freeze | grep wheel"):
+        print("wheel not installed.\nUse `pip install wheel`.\nExiting.")
+        sys.exit()
+    if os.system("pip freeze | grep twine"):
+        print("twine not installed.\nUse `pip install twine`.\nExiting.")
+        sys.exit()
+    os.system("python setup.py sdist bdist_wheel")
+    os.system("twine upload dist/*")
+    print("You probably want to also tag the version now:")
+    v = get_version(package)
+    print("  git tag -a %s -m 'version %s'" % (v, v))
+    print("  git push --tags")
+    shutil.rmtree('dist')
+    shutil.rmtree('build')
+    shutil.rmtree('django_image_renderer.egg-info')
     sys.exit()
 
 

@@ -7,6 +7,7 @@ __author__ = 'rouk1'
 
 register = template.Library()
 
+
 @register.simple_tag
 def rendition(master_image, width=0, heigth=0):
     w, h = master_image.get_rendition_size(width, heigth)

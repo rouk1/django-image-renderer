@@ -1,7 +1,7 @@
 include LICENSE
 include README.md
-recursive-include renderer/static *.js *.css *.png *.eot *.svg *.ttf *.woff
-recursive-include renderer/templates *.html
+recursive-include renderer/static *.js *.css
 recursive-include renderer/migrations *.py
+recursive-include renderer/templatetags *.py
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
