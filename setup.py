@@ -14,9 +14,18 @@ url = 'https://github.com/rouk1/django-image-renderer'
 author = 'rouk1'
 author_email = 'matthieu.jouis@gmail.com'
 license = 'WTFPL'
-install_requires = ['Pillow', 'django-picklefield']
-with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
-    README = readme.read()
+install_requires = [
+    'Pillow>=3.0.0',
+    'django-picklefield>=0.3.2'
+]
+
+try:
+    from pypandoc import convert
+    read_md = lambda f: convert(f, 'rst')
+except ImportError:
+    read_md = lambda f: open(f, 'r').read()
+
+README = read_md('README.md')
 
 
 def get_version(package):

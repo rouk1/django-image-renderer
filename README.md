@@ -39,6 +39,15 @@ Run `python manage.py migrate` to create the renderer models.
 Start the development server and visit http://localhost:8000/admin/
 to create a MasterImage (you'll need the Admin app enabled).
 
+## Requirements
+
+- Python 2.7
+- Django 1.8
+
+## Installation
+
+TODO
+
 ## Usage
 
 With a _MasterImage_ you can ask for renditions.
@@ -51,18 +60,18 @@ m.get_master_url()
 # or
 m.get_rendition_url(0, 0)
 
-# cache and return URL of a renditions that as 200 pixels width 
+# cache and return URL of a renditions that as 200 pixels width
 # and height computed according to master's aspect ratio
 url = m.get_rendition_url(200, 0)
 
-# cache and return URL of a renditions that as 50 pixels height 
+# cache and return URL of a renditions that as 50 pixels height
 # and width computed according to master's aspect ratio
-url = m.get_rendition_url(0, 50) 
+url = m.get_rendition_url(0, 50)
 ```
 
 If you ask for a size that do not fit master's aspect ration you'll receive a center cropped image.
 
-You can also ask for a rendition in templates. 
+You can also ask for a rendition in templates.
 
 ```python
 def index(request):
