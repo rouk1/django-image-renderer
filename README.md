@@ -42,7 +42,7 @@ to create a MasterImage (you'll need the Admin app enabled).
 ## Requirements
 
 - Python 2.7
-- Django 1.8
+- Django (1.7, 1.8, 1.9b1)
 
 ## Installation
 
