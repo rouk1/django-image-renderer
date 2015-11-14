@@ -5,6 +5,7 @@
 [![PyPI Version](https://img.shields.io/pypi/v/django-image-renderer.svg)](https://pypi.python.org/pypi/django-image-renderer)
 
 Django image renderer is Django app that will help you render images in many sizes (renditions).
+This can be really helpful for generating images size for different screens resolution (especially when targeting mobile).
 
 ---
 
