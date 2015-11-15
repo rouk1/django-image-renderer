@@ -35,11 +35,27 @@ class WidgetTest(TestCase):
             'cant access change page'
         ))
 
-    def test_demo_view(self):
+    def test_demo_views(self):
         create_demo_model()
 
         c = Client()
         r = c.get(reverse('demo:index'))
         self.assertEqual(r.status_code, 200, (
-            'cant access demo page'
+            'cant access index page'
         ))
+
+        r = c.get(reverse('demo:ratio'))
+        self.assertEqual(r.status_code, 200, (
+            'cant access ratio page'
+        ))
+
+        r = c.get(reverse('demo:random'))
+        self.assertEqual(r.status_code, 200, (
+            'cant access random page'
+        ))
+
+        r = c.get(reverse('demo:filters'))
+        self.assertEqual(r.status_code, 200, (
+            'cant access filters page'
+        ))
+        

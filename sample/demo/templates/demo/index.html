@@ -2,46 +2,20 @@
 {% load renderer %}
 
 {% block head %}
-<style>
-    .panel {
-        margin: 10px;
-    }
-    .panel-body {
-        background-color: #cecece;
-    }
-    .panel-body,
-    .panel-heading {
-        text-align: center;
-    }
-</style>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
 {% endblock %}
 
 {% block body %}
-<h1>rendering samples</h1>
-<p class="lead">this page generate {{ renditions|length }} random renditions</p>
-<div class="row">
-{% for w, h in renditions %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            {% verbatim %}
-            {% rendition master
-            {% endverbatim %}
-            {{ w }} {{ h }}
-            {% verbatim %}%}{% endverbatim %}
-        </div>
-        <div class="panel-body">
-            {% rendition master w h %}
-        </div>
-    </div>
-    {% if forloop.counter|divisibleby:2 %}
-        </div>
-        {% if not forloop.last %}
-        <div class="row">
-        {% endif %}
-    {% endif %}
-</div>
-{% endfor %}
+{{ text|safe }}
 {% endblock %}
 
 {% block script %}
+<script>
+$(document).ready(function() {
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+});
+</script>
 {% endblock %}

@@ -30,6 +30,7 @@ pip install django-image-renderer
 Add "renderer" to your INSTALLED_APPS setting like this:
 
 _settings.py_
+
 ```python
 INSTALLED_APPS = (
     # your apps
@@ -40,6 +41,7 @@ INSTALLED_APPS = (
 Include the renderer URL configuration in your project _urls.py_ like this:
 
 _urls.py_
+
 ```python
 url(r'^renderer/', include('renderer.urls', namespace='renderer'))),
 ```
@@ -81,6 +83,7 @@ If you ask for a size that do not fit master's aspect ration you'll receive a ce
 You can also ask for a rendition in templates.
 
 _models.py_
+
 ```python
 def index(request):
     m = MasterImage.objects.first()
@@ -90,6 +93,7 @@ def index(request):
 ```
 
 _index.html_
+
 ```HTML+Django
 {% load renderer %}
 ...
@@ -107,6 +111,7 @@ When using _MasterImage_ in your model you may need a widget who provides a prev
 For convenience a mixin is provided.
 
 _models.py_
+
 ```python
 from django.db import models
 
@@ -115,6 +120,7 @@ class DemoModel(models.Model):
 ```
 
 _admin.py_
+
 ```python
 from demo.models import DemoModel
 from django.contrib import admin
