@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^renderer/', include('renderer.urls', namespace='renderer')),
 ]
 
-if settings.AWS_SECRET_ACCESS_KEY is not None:
+if settings.AWS_SECRET_ACCESS_KEY is None:
     urlpatterns = urlpatterns + static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
