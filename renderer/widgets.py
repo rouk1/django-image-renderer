@@ -26,7 +26,7 @@ class AdminImageWidget(forms.FileInput):
                           '<img src="%s" width="100" /></a> '
                           % (value.url, url))
         output.append(super(AdminImageWidget, self).render(name, value, attrs))
-        return mark_safe(u''.join(output))
+        return mark_safe(''.join(output))
 
 
 class MasterImageWidget(ForeignKeyRawIdWidget):
