@@ -2,38 +2,20 @@
 {% load renderer %}
 
 {% block head %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
 {% endblock %}
 
 {% block body %}
-<div class="jumbotron">
-    <h1>rendering samples</h1>
-    <p class="lead">this page generates renditions of this master</p>
-    <p class="master">{% rendition master 0 0 %}</p>
-</div>
-<div class="row">
-{% for w, h in renditions %}
-    <div class="col-xs-12 col-sm-6 col-md-6">
-        <div class="rendition">
-            <code class="template-tag">
-                {% verbatim %}
-                {% rendition master
-                {% endverbatim %}
-                {{ w }} {{ h }}
-                {% verbatim %}%}{% endverbatim %}
-            </code>
-            <div class="rendered-image">
-                {% rendition master w h %}
-            </div>
-        </div>
-    </div>
-{% if forloop.counter|divisibleby:2 %}
-    </div>
-    {% if not forloop.last %}
-    <div class="row">
-    {% endif %}
-{% endif %}
-{% endfor %}
+{{ text|safe }}
 {% endblock %}
 
 {% block script %}
+<script>
+$(document).ready(function() {
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+});
+</script>
 {% endblock %}
