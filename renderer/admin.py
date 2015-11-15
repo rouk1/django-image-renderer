@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from models import MasterImage
+from renderer.models import MasterImage
 from renderer.widgets import AdminImageWidget
 
 

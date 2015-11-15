@@ -7,9 +7,9 @@ from django.core.files.storage import default_storage
 
 from picklefield.fields import PickledObjectField
 from PIL import Image
+from io import BytesIO
 
 import os
-import StringIO
 import uuid
 
 IMAGE_DIRECTORY = 'img'
@@ -84,7 +84,7 @@ class MasterImage(models.Model):
     def delete_all_renditions(self):
         '''delete all renditions and rendition dict'''
         if self.renditions:
-            for r in self.renditions.itervalues():
+            for r in self.renditions.values():
                 default_storage.delete(r)
             self.renditions = {}
 
@@ -137,7 +137,7 @@ class MasterImage(models.Model):
                 rendition_key,
                 ext
             )
-            fd = StringIO.StringIO()
+            fd = BytesIO()
             image.save(fd, format)
             default_storage.save(rendition_name, fd)
 
