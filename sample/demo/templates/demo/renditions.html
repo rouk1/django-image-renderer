@@ -1,0 +1,39 @@
+{% extends "demo/base.html" %}
+{% load renderer %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+    {% block title %}
+    {% endblock %}
+</div>
+<div class="row">
+{% for w, h in renditions %}
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="rendition">
+            <code class="template-tag">
+                {% verbatim %}
+                {% rendition master
+                {% endverbatim %}
+                {{ w }} {{ h }}
+                {% verbatim %}%}{% endverbatim %}
+            </code>
+            <div class="rendered-image">
+                {% rendition master w h %}
+            </div>
+        </div>
+    </div>
+{% if forloop.counter|divisibleby:2 %}
+    </div>
+    {% if not forloop.last %}
+    <div class="row">
+    {% endif %}
+{% endif %}
+{% endfor %}
+<p>bender by <a href="http://se7enes.deviantart.com/">se7enes</a>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
