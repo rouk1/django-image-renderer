@@ -4,7 +4,7 @@
 [![Coverage](https://codecov.io/github/rouk1/django-image-renderer/coverage.svg?branch=master)](https://codecov.io/github/rouk1/django-image-renderer?branch=master)
 [![PyPI Version](https://img.shields.io/pypi/v/django-image-renderer.svg)](https://pypi.python.org/pypi/django-image-renderer)
 
-Django image renderer is Django app that will help you render images in many sizes (renditions).
+Django image renderer is an app that will help you render images in many sizes (renditions).
 This can be really helpful for generating images size for different screens resolution (especially when targeting mobile).
 
 ---
@@ -15,7 +15,7 @@ This can be really helpful for generating images size for different screens reso
 - uses Django's _default_storage_ to let you play with whatever storage backend you'll need
 - uploaded image files named using uuid
 - rendition cached on disk
-- resize keeping orignal aspect ratio
+- resize keeping original aspect ratio
 - crop if needed
 - simple widget for admin site
 
@@ -29,6 +29,7 @@ pip install django-image-renderer
 
 Add "renderer" to your INSTALLED_APPS setting like this:
 
+_settings.py_
 ```python
 INSTALLED_APPS = (
     # your apps
@@ -36,8 +37,9 @@ INSTALLED_APPS = (
 )
 ```
 
-Include the renderer URLconf in your project urls.py like this:
+Include the renderer URL configuration in your project _urls.py_ like this:
 
+_urls.py_
 ```python
 url(r'^renderer/', include('renderer.urls', namespace='renderer'))),
 ```
@@ -78,6 +80,7 @@ If you ask for a size that do not fit master's aspect ration you'll receive a ce
 
 You can also ask for a rendition in templates.
 
+_models.py_
 ```python
 def index(request):
     m = MasterImage.objects.first()
@@ -86,6 +89,7 @@ def index(request):
     })
 ```
 
+_index.html_
 ```HTML+Django
 {% load renderer %}
 ...
@@ -124,7 +128,7 @@ class DemoModelAdmin(MasterImageAdminMixin, admin.ModelAdmin):
 ## Sample project
 
 A sample project is available in the [sample](https://github.com/rouk1/django-image-renderer/tree/master/sample) folder.
-Test it as an usual django project:
+Test it as an usual Django project:
 
 ```sh
 virtualenv --no-site-packages venv
