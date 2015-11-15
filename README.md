@@ -21,6 +21,12 @@ This can be really helpful for generating images size for different screens reso
 
 ## Quick start
 
+Install the app.
+
+```sh
+pip install django-image-renderer
+```
+
 Add "renderer" to your INSTALLED_APPS setting like this:
 
 ```python
@@ -45,12 +51,6 @@ to create a MasterImage (you'll need the Admin app enabled).
 
 - Python (2.7, 3.2, 3.3, 3.4, 3.5)
 - Django (1.7, 1.8, 1.9b1)
-
-## Installation
-
-```sh
-pip install django-image-renderer
-```
 
 ## Usage
 
