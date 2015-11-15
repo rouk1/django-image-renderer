@@ -1,24 +1,21 @@
 language: python
 
 python:
-  - "2.7"
-  - "3.2"
-  - "3.3"
-  - "3.4"
-  - "3.5"
+  - 2.7
+  - 3.2
+  - 3.3
+  - 3.4
+  - 3.5
 
 env:
   - DJANGO_VERSION=1.7
   - DJANGO_VERSION=1.8
   - DJANGO_VERSION=1.9b1
 
-before_install:
-  - pip install codecov
+install:
   # coverage 4.0 doesn't support Python 3.2
   - if [ "$TRAVIS_PYTHON_VERSION" == "3.2" ]; then travis_retry pip install coverage==3.7.1; fi
   - if [ "$TRAVIS_PYTHON_VERSION" != "3.2" ]; then travis_retry pip install coverage; fi
-
-install:
   - pip install -q Django==$DJANGO_VERSION
   - pip install -q -r requirements.txt
 
@@ -26,4 +23,5 @@ script:
   - coverage run sample/manage.py test demo renderer
 
 after_success:
+  - pip install codecov
   - codecov
