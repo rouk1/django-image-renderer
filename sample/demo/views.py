@@ -1,6 +1,8 @@
+from random import randint
+
 from django.shortcuts import render
 from renderer.models import MasterImage
-from random import randint
+
 
 def index(request):
     m = MasterImage.objects.first()
@@ -13,4 +15,12 @@ def index(request):
     return render(request, 'demo/index.html', {
         'master': m,
         'renditions': renditions,
+    })
+
+
+def filters(request):
+    m = MasterImage.objects.first()
+    return render(request, 'demo/index.html', {
+        'master': m,
+        'renditions': [],
     })

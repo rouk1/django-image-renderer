@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from StringIO import StringIO
-
+from io import BytesIO
 from PIL import Image
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
-from models import MasterImage
+from renderer.models import MasterImage
 
 
 def create_superuser():
@@ -19,9 +18,9 @@ def create_superuser():
 
 
 def make_image():
-    image_file = StringIO()
+    image_file = BytesIO()
     image = Image.new('RGBA', size=(50, 50), color=(256, 0, 0))
-    image.save(image_file, 'png')
+    image.save(image_file, format='png')
     image_file.seek(0)
     return image_file
 
@@ -40,7 +39,7 @@ def create_image():
 class RendererTest(TestCase):
     def test_create(self):
         master_image = create_image()
-        self.assertTrue(MasterImage.objects.all() > 0)
+        self.assertTrue(MasterImage.objects.count() > 0)
         self.assertTrue(len(master_image.get_master_url()) > 0)
         self.assertTrue('test' not in master_image.get_master_filename())
         master_image.delete()
