@@ -2,3 +2,5 @@ Django==1.8.6
 Markdown==2.6.4
 Pillow==3.0.0
 django-picklefield==0.3.2
+django-toolbelt==0.0.1
+django-storages-redux==1.3

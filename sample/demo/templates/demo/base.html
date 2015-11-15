@@ -75,9 +75,9 @@
 					<li class="{% if random_url == request.get_full_path %}active{% endif %}">
 						<a href="{{ random_url }}">random renditions {% if index_url == request.get_full_path %}<span class="sr-only">(current)</span>{% endif %}</a>
 					</li>
-					<li class="{% if filters_url == request.get_full_path %}active{% endif %}">
+					<!--<li class="{% if filters_url == request.get_full_path %}active{% endif %}">
 						<a href="{{ filters_url }}">filters {% if filters_url == request.get_full_path %}<span class="sr-only">(current)</span>{% endif %}</a>
-					</li>
+					</li>-->
 					<li class="visible-xs-block">
 						<a href="https://github.com/rouk1/django-image-renderer">Github project</a>
 					</li>
