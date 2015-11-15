@@ -6,9 +6,8 @@
 
 {% block body %}
 <div class="jumbotron">
-    <h1>rendering samples</h1>
-    <p class="lead">this page generates renditions of this master</p>
-    <p class="master">{% rendition master 0 0 %}</p>
+    {% block title %}
+    {% endblock %}
 </div>
 <div class="row">
 {% for w, h in renditions %}

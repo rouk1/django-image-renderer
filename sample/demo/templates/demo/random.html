@@ -1,0 +1,8 @@
+{% extends "demo/renditions.html" %}
+{% load renderer %}
+
+{% block title %}
+<h1>Random rendering samples</h1>
+<p class="lead">this page generate {{ renditions|length }} random renditions of this master</p>
+<p class="master">{% rendition master 0 0 %}</p>
+{% endblock %}
