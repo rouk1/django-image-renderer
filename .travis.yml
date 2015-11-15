@@ -12,10 +12,13 @@ env:
   - DJANGO_VERSION=1.8
   - DJANGO_VERSION=1.9b1
 
-install:
-  - pip install codecov
-  # Coveralls 4.0 doesn't support Python 3.2
+before_install:
+  # coverage 4.0 doesn't support Python 3.2
   - if [ "$TRAVIS_PYTHON_VERSION" == "3.2" ]; then travis_retry pip install coverage==3.7.1; fi
+  - if [ "$TRAVIS_PYTHON_VERSION" != "3.2" ]; then travis_retry pip install coverage; fi
+  - pip install codecov
+
+install:
   - pip install -q Django==$DJANGO_VERSION
   - pip install -q -r requirements.txt
 
