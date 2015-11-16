@@ -134,7 +134,6 @@ class DemoModelAdmin(MasterImageAdminMixin, admin.ModelAdmin):
 ## Sample project
 
 A sample project is available in the [sample](https://github.com/rouk1/django-image-renderer/tree/master/sample) folder.
-It' also deployed at http://django-image-renderer.herokuapp.com/.
 Test it as an usual Django project:
 
 ```sh
@@ -145,3 +144,5 @@ python sample/manage.py migrate
 python sample/manage.py createsuperuser
 python sample/manage.py runserver
 ```
+
+It' also deployed at http://django-image-renderer.herokuapp.com/.
