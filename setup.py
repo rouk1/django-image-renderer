@@ -40,6 +40,9 @@ def get_version(package):
 
 
 if sys.argv[-1] == 'publish':
+    if os.system("pip freeze | grep pypandoc"):
+        print("pypandoc not installed.\nInstall pandoc then Use `pip install pypandoc`.\nExiting.")
+        sys.exit()
     if os.system("pip freeze | grep wheel"):
         print("wheel not installed.\nUse `pip install wheel`.\nExiting.")
         sys.exit()
