@@ -7,6 +7,7 @@ from django.core.files.base import ContentFile
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from renderer.models import MasterImage
+from templatetags.renderer import rendition_url, rendition
 
 
 def create_superuser():
@@ -125,3 +126,13 @@ class RendererTest(TestCase):
         master_image.__unicode__()
 
         master_image.delete()
+
+    def test_template_tags(self):
+        master_image = create_image()
+
+        # FIXME force reopen the file
+        # why should I do that ?
+        master_image.master.open()
+
+        self.assertIsNotNone('<img', rendition(master_image, 12, 15))
+        self.assertIsNotNone(rendition_url(master_image, 12, 15))

@@ -9,13 +9,18 @@ register = template.Library()
 
 
 @register.simple_tag
-def rendition(master_image, width=0, heigth=0):
-    w, h = master_image.get_rendition_size(width, heigth)
+def rendition(master_image, width=0, height=0):
+    w, h = master_image.get_rendition_size(width, height)
     node = '<img src="%s" width="%d" height="%d" alt="%s">' % (
-        master_image.get_rendition_url(width, heigth),
+        master_image.get_rendition_url(width, height),
         w,
         h,
         master_image.alternate_text
     )
 
     return mark_safe(node)
+
+
+@register.simple_tag
+def rendition_url(master_image, width=0, height=0):
+    return master_image.get_rendition_url(width, height)

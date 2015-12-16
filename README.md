@@ -99,12 +99,17 @@ _index.html_
 ...
 {% rendition master 42 42 %}
 ...
+{% rendition_url 42 42 %}
+...
 ```
 
 This will render as:
 
 ```HTML
 <img src="/media/img/0fb34de8-9d83-456a-828b-72ab21f8ebab_42x42.png" width="42" height="42" alt="">
+...
+/media/img/0fb34de8-9d83-456a-828b-72ab21f8ebab_42x42.png
+...
 ```
 
 When using _MasterImage_ in your model you may need a widget who provides a preview for you image.
