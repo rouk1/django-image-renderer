@@ -43,7 +43,7 @@ Include the renderer URL configuration in your project _urls.py_ like this:
 _urls.py_
 
 ```python
-url(r'^renderer/', include('renderer.urls', namespace='renderer'))),
+url(r'^renderer/', include('renderer.urls', namespace='renderer')),
 ```
 
 Run `python manage.py migrate` to create the renderer models.
