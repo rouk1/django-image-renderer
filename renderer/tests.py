@@ -7,7 +7,7 @@ from django.core.files.base import ContentFile
 from django.core.urlresolvers import reverse
 from django.test import TestCase, Client
 from renderer.models import MasterImage
-from templatetags.renderer import rendition_url, rendition
+from renderer.templatetags.renderer import rendition_url, rendition
 
 
 def create_superuser():
