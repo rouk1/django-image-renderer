@@ -1,16 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+import os
+import uuid
+from io import BytesIO
+
+from PIL import Image, ImageFile
+from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
-from django.core.files.storage import default_storage
-
 from picklefield.fields import PickledObjectField
-from PIL import Image
-from io import BytesIO
 
-import os
-import uuid
+# be sure to open image even if
+# IOError at /renderer/masterimage/
+# image file is truncated (50 bytes not processed)
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 IMAGE_DIRECTORY = 'img'
 
@@ -101,10 +105,10 @@ class MasterImage(models.Model):
         target_w = float(width)
         target_h = float(height)
 
-        if(target_w == 0):
+        if (target_w == 0):
             target_w = self.master_width
 
-        if(target_h == 0):
+        if (target_h == 0):
             target_h = self.master_height
 
         rendition_key = '%dx%d' % (target_w, target_h)
@@ -112,7 +116,7 @@ class MasterImage(models.Model):
         if rendition_key in self.renditions:
             return self.renditions[rendition_key]
 
-        if(target_w != self.master_width or target_h != self.master_height):
+        if (target_w != self.master_width or target_h != self.master_height):
             r = target_w / target_h
             R = float(self.master_width) / self.master_height
             if r != R:
