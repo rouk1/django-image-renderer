@@ -1,5 +1,5 @@
 Django==1.9
-Pillow==3.0.0
+Pillow==6.2.0
 boto==2.38.0
 django-picklefield==0.3.2
 django-storages-redux==1.3
