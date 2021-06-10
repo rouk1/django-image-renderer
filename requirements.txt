@@ -1,4 +1,4 @@
-Django==1.11.29
+Django==2.2.24
 Pillow==3.0.0
 boto==2.38.0
 django-picklefield==0.3.2
